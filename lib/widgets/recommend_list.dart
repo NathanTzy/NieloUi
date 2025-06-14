@@ -101,7 +101,7 @@ class RecommendList extends StatelessWidget {
                 children: [
                   Text(
                     item['label']!,
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    style: const TextStyle(color: Color.fromARGB(255, 235, 235, 235), fontWeight: FontWeight.bold),
                   ),
                   Text(
                     item['products']!,
