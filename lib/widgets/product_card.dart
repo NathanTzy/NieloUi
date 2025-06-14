@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nielo_ui/dummy_data/product.dart';
 import 'package:nielo_ui/screens/detail/detail_screen.dart';
+import 'package:nielo_ui/global/favorite_data.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -22,7 +23,6 @@ class ProductCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Gambar
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: AspectRatio(
@@ -57,14 +57,27 @@ class ProductCard extends StatelessWidget {
           ),
         ),
 
-        // Icon heart (favorite)
+        // Icon Heart
         Positioned(
           top: 8,
           right: 8,
-          child: Icon(
-            Icons.favorite_border,
-            size: 20,
-            color: Colors.grey.shade400,
+          child: ValueListenableBuilder<Map<String, bool>>(
+            valueListenable: favoriteStatus,
+            builder: (context, value, _) {
+              final isFavorite = value[product.name] ?? false;
+              return GestureDetector(
+                onTap: () {
+                  final newMap = Map<String, bool>.from(favoriteStatus.value);
+                  newMap[product.name] = !isFavorite;
+                  favoriteStatus.value = newMap;
+                },
+                child: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                  size: 20,
+                  color: isFavorite ? Colors.red : Colors.grey.shade400,
+                ),
+              );
+            },
           ),
         ),
       ],

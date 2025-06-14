@@ -20,7 +20,6 @@ class ProductGallery extends StatelessWidget {
         const SizedBox(height: 8),
         Stack(
           children: [
-            // Gambar besar di belakang
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
@@ -30,7 +29,6 @@ class ProductGallery extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            // 3 thumbnail kecil di kiri bawah
             Positioned(
               top: 16,
               left: 16,

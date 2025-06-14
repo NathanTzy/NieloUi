@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nielo_ui/dummy_data/product.dart';
+import 'package:nielo_ui/global/cart_data.dart';
+import 'package:nielo_ui/global/cart_item.dart';
+import 'package:nielo_ui/screens/main_wrapper.dart';
 import 'package:nielo_ui/widgets/size_option.dart';
 
 class ProductInfo extends StatefulWidget {
@@ -111,9 +114,22 @@ class _ProductInfoState extends State<ProductInfo> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                print('Ukuran dipilih: $selectedSize');
+                cartItems.value = [
+                  ...cartItems.value,
+                  CartItem(
+                    name: widget.product.name,
+                    price: widget.product.price,
+                    size: selectedSize,
+                  ),
+                ];
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MainWrapper(initialIndex: 2),
+                  ),
+                );
               },
-              child: const Text('Add to cart'),
+              child: const Text('Add to cart', style: TextStyle(color: Colors.white),),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 48),
                 backgroundColor: Colors.black,

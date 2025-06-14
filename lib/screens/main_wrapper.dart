@@ -4,16 +4,24 @@ import 'package:nielo_ui/screens/home/home_screen.dart';
 import 'package:nielo_ui/screens/search/search_screen.dart';
 
 class MainWrapper extends StatefulWidget {
-  const MainWrapper({super.key});
+  final int initialIndex;
+
+  const MainWrapper({super.key, this.initialIndex = 0});
 
   @override
   State<MainWrapper> createState() => _MainWrapperState();
 }
 
 class _MainWrapperState extends State<MainWrapper> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
 
   List<String> searchHistory = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+  }
 
   void addSearchTerm(String term) {
     if (!searchHistory.contains(term)) {
@@ -112,4 +120,3 @@ class _MainWrapperState extends State<MainWrapper> {
     });
   }
 }
-
